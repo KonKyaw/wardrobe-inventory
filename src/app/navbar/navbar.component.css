@@ -1,0 +1,6 @@
+.dropdown-toggle {
+    cursor: pointer;
+}
+.nav-link::marker {
+    display: none;
+}

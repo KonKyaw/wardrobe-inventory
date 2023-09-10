@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "wardrobe-inventory-42f37"
+  },
+  "targets": {
+    "wardrobe-inventory-42f37": {
+      "hosting": {
+        "wardrobe-inventory": [
+          "wardrobe-inventory-42f37"
+        ]
+      }
+    }
+  }
+}
