@@ -10,13 +10,18 @@
           <li class="nav-item">
             <a class="nav-link" routerLink="/products">Products</a>
           </li>
-
-          <li ngbDropdown class="nav-item dropdown">
-            <a ngbDropdownToggle class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Username</a>
+          <li *ngIf="!user" class="nav-item">
+            <a class="nav-link" routerLink="/login">Login
+            </a>
+          </li>
+          <li ngbDropdown *ngIf="user" class="nav-item dropdown">
+            <a ngbDropdownToggle class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+              {{ this.user.displayName }}
+            </a>
             <ul ngbDropdownMenu class="dropdown-menu">
               <li><a class="dropdown-item" routerLink="/">My Orders</a></li>
               <li><a class="dropdown-item" routerLink="/">Another action</a></li>
-              <li><a class="dropdown-item">Log Out</a></li>
+              <li><a class="dropdown-item" (click)="logout()">Log Out</a></li>
             </ul>
           </li>
           
