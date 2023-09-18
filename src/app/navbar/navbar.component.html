@@ -10,13 +10,17 @@
           <li class="nav-item">
             <a class="nav-link" routerLink="/products">Products</a>
           </li>
-          <li *ngIf="!user" class="nav-item">
+          <li *ngIf="!auth.user" class="nav-item">
             <a class="nav-link" routerLink="/login">Login
             </a>
           </li>
-          <li ngbDropdown *ngIf="user" class="nav-item dropdown">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/dashboard">Dashboard
+            </a>
+          </li>
+          <li ngbDropdown *ngIf="auth.user" class="nav-item dropdown">
             <a ngbDropdownToggle class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-              {{ this.user.displayName }}
+              {{ this.auth.user.displayName }}
             </a>
             <ul ngbDropdownMenu class="dropdown-menu">
               <li><a class="dropdown-item" routerLink="/">My Orders</a></li>
