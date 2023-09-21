@@ -15,11 +15,13 @@ export class UserService {
   constructor() { }
 
   save(user: User) {
-    console.log(this.db);
-    set(ref(this.db, 'users/' + user.uid), {
-      name: user.displayName,
-      email: user.email
-    });
+    console.log("userService", this.db);
+    set(ref(this.db, 'users/' + user.uid + '/name'), user.displayName);
+    set(ref(this.db, 'users/' + user.uid + '/email'), user.email);
+    // set(ref(this.db, 'users/' + user.uid), {
+    //   name: user.displayName,
+    //   email: user.email,
+    // });
   }
   get(uid: string): Observable<AppUser> {
     object(ref(this.database, 'users/' + uid)).subscribe(data => 
