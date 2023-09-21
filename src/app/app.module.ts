@@ -4,9 +4,7 @@ import { environment } from './../environments/environment';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth'
 import { getDatabase, provideDatabase } from '@angular/fire/database';
-// import { AngularFireModule } from '@angular/fire/compat';
-// import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
-// import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 
@@ -21,6 +19,9 @@ import { LoginComponent } from './login/login.component';
 import { AuthService } from './auth.service';
 import { authGuard } from './auth-guard';
 import { UserService } from './user.service';
+import { ProductFormComponent } from './admin/product-form/product-form.component';
+import { CategoryService } from './category.service';
+import { adminAuthGuard } from './admin-auth-guard';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { UserService } from './user.service';
     ProductsComponent,
     DashboardComponent,
     AdminProductsComponent,
-    LoginComponent
+    LoginComponent,
+    ProductFormComponent
   ],
   imports: [
     BrowserModule,
@@ -44,13 +46,16 @@ import { UserService } from './user.service';
       { path: 'products', component: ProductsComponent },
       { path: 'dashboard', component: DashboardComponent, canActivate: [authGuard]},
       { path: 'login', component: LoginComponent},
-      { path: 'admin/products', component: AdminProductsComponent},
-      { path: 'admin/dashboard', component: DashboardComponent}
+      { path: 'admin/products', component: AdminProductsComponent, canActivate: [authGuard]},
+      { path: 'admin/products/new', component: ProductFormComponent, canActivate: [authGuard, adminAuthGuard]},
+      { path: 'admin/dashboard', component: DashboardComponent, canActivate: [authGuard]}
     ])
   ],
   providers: [
     AuthService,
-    UserService
+    CategoryService,
+    UserService,
+    { provide: FIREBASE_OPTIONS, useValue: environment.firebase }
   ],
   bootstrap: [AppComponent]
 })
