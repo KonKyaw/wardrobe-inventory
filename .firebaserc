@@ -1,6 +1,7 @@
 {
   "projects": {
-    "default": "wardrobe-inventory-15a18"
+    "default": "wardrobe-inventory-15a18",
+    "wardrobe-inventory-15a18": "wardrobe-inventory-15a18"
   },
   "targets": {
     "wardrobe-inventory-15a18": {
