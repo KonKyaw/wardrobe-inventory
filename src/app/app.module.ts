@@ -6,7 +6,8 @@ import { getAuth, provideAuth } from '@angular/fire/auth'
 import { getDatabase, provideDatabase } from '@angular/fire/database';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { RouterModule } from '@angular/router';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,6 +23,7 @@ import { UserService } from './user.service';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
 import { CategoryService } from './category.service';
 import { adminAuthGuard } from './admin-auth-guard';
+import { ProductService } from './product.service';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,7 @@ import { adminAuthGuard } from './admin-auth-guard';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
@@ -55,6 +58,7 @@ import { adminAuthGuard } from './admin-auth-guard';
     AuthService,
     CategoryService,
     UserService,
+    ProductService,
     { provide: FIREBASE_OPTIONS, useValue: environment.firebase }
   ],
   bootstrap: [AppComponent]
