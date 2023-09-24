@@ -19,7 +19,7 @@ export const adminAuthGuard = (state: RouterStateSnapshot) => {
         }
       }),
       map((appUser) => {
-        console.log("isAdmin", appUser?.isAdmin);
+        // console.log("isAdmin", appUser?.isAdmin);
         if (!appUser?.isAdmin) {
           router.navigate(['/'], { queryParams: { returnUrl: state.url }});
           return false;
@@ -28,10 +28,4 @@ export const adminAuthGuard = (state: RouterStateSnapshot) => {
         }
       )
     )
-
-    // return auth.authState$.pipe(
-    //   filter((user) => user !== undefined),
-    //   switchMap((user) => userService.get(user.uid)),
-    //   map(appUser => appUser.isAdmin)
-    // )
   };

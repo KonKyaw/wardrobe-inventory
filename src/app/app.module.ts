@@ -7,7 +7,7 @@ import { getDatabase, provideDatabase } from '@angular/fire/database';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -39,6 +39,7 @@ import { ProductService } from './product.service';
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
@@ -49,8 +50,9 @@ import { ProductService } from './product.service';
       { path: 'products', component: ProductsComponent },
       { path: 'dashboard', component: DashboardComponent, canActivate: [authGuard]},
       { path: 'login', component: LoginComponent},
-      { path: 'admin/products', component: AdminProductsComponent, canActivate: [authGuard]},
       { path: 'admin/products/new', component: ProductFormComponent, canActivate: [authGuard, adminAuthGuard]},
+      { path: 'admin/products/:id', component: ProductFormComponent, canActivate: [authGuard, adminAuthGuard]},
+      { path: 'admin/products', component: AdminProductsComponent, canActivate: [authGuard]},
       { path: 'admin/dashboard', component: DashboardComponent, canActivate: [authGuard]}
     ])
   ],

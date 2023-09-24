@@ -11,12 +11,7 @@ export class CategoryService {
 
   getCategories(): any{
     const quRef = query(ref(this.database, 'categories'), orderByChild('name'));
-
-    listVal(quRef).subscribe(data => 
-      console.log("category.service", data)
-      )
     return listVal(quRef);
-    
   }
 
 }

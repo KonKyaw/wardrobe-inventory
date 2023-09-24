@@ -8,14 +8,14 @@
       <div class="collapse navbar-collapse" id="navbarsExample09">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link" routerLink="/products">Products</a>
+            <a class="nav-link" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" routerLink="/products">Products</a>
           </li>
           <li *ngIf="!auth.user" class="nav-item">
             <a class="nav-link" routerLink="/login">Login
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/dashboard">Dashboard
+            <a class="nav-link" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" routerLink="/dashboard">Dashboard
             </a>
           </li>
           <li ngbDropdown *ngIf="auth.user" class="nav-item dropdown">
@@ -23,9 +23,9 @@
               {{ this.auth.user.displayName }}
             </a>
             <ul ngbDropdownMenu class="dropdown-menu">
-              <li><a class="dropdown-item" routerLink="/">My Orders</a></li>
-              <li><a class="dropdown-item" routerLink="admin/products">Manage Products</a></li>
-              <li><a class="dropdown-item" (click)="logout()">Log Out</a></li>
+              <li><a class="dropdown-item" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" routerLink="/">My Orders</a></li>
+              <li><a class="dropdown-item" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" routerLink="admin/products">Manage Products</a></li>
+              <li><a class="dropdown-item" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" (click)="logout()">Log Out</a></li>
             </ul>
           </li>
           
