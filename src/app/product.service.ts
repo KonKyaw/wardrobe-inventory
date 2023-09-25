@@ -9,7 +9,6 @@ import { AppProduct } from './models/app-product';
 export class ProductService {
   public database: Database = inject(Database);
   public db = getDatabase();
-  private editData: any[] | undefined;
 
   constructor() { }
 

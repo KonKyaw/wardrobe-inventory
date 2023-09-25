@@ -1,5 +1,5 @@
 import { OnDestroy, inject, Injectable } from '@angular/core';
-import { Auth, GoogleAuthProvider, signInWithRedirect, User, authState } from '@angular/fire/auth';
+import { Auth, GoogleAuthProvider, signInWithRedirect, User, authState, user } from '@angular/fire/auth';
 import { ActivatedRoute } from '@angular/router';
 import { getRedirectResult } from 'firebase/auth';
 import { Subscription } from 'rxjs';
@@ -9,8 +9,8 @@ import { Subscription } from 'rxjs';
 })
 export class AuthService implements OnDestroy {
   private auth: Auth = inject(Auth);
-  
-  public user?: User | null
+  public user = {} as User | null;
+  // public user?: User | null
   authState$ = authState(this.auth);
   authStateSubscription: Subscription;
 
@@ -18,7 +18,7 @@ export class AuthService implements OnDestroy {
     this.authStateSubscription = this.authState$.subscribe((aUser: User | null) => {
         //handle auth state changes here. Note, that user will be null if there is no currently logged in user.
         this.user = aUser;
-      // console.log("authService", aUser);
+        console.log("authService", this.user);
     })
   }
 

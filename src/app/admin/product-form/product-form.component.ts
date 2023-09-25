@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CategoryService } from 'src/app/category.service';
 import { ProductService } from 'src/app/product.service';
 import { AppProduct } from 'src/app/models/app-product';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-product-form',
@@ -11,9 +12,9 @@ import { AppProduct } from 'src/app/models/app-product';
   styleUrls: ['./product-form.component.css']
 })
 export class ProductFormComponent {
-  categories$;
-  editProduct$;
-  private idProduct: string | null;
+  categories$: Observable<any> = new Observable;
+  editProduct$: Observable<any> = new Observable;
+  private idProduct: string | null = '';
 
   private urlPattern = /^(https?|http?|ftp):\/\/[^\s/$.?#].[^\s]*\.(jpg|jpeg|png|gif|bmp)$/;
   

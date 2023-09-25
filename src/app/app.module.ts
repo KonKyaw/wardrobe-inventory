@@ -8,6 +8,7 @@ import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatTableModule } from '@angular/material/table';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,6 +25,7 @@ import { ProductFormComponent } from './admin/product-form/product-form.componen
 import { CategoryService } from './category.service';
 import { adminAuthGuard } from './admin-auth-guard';
 import { ProductService } from './product.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,7 @@ import { ProductService } from './product.service';
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
+    MatTableModule,
     AppRoutingModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
@@ -54,7 +57,8 @@ import { ProductService } from './product.service';
       { path: 'admin/products/:id', component: ProductFormComponent, canActivate: [authGuard, adminAuthGuard]},
       { path: 'admin/products', component: AdminProductsComponent, canActivate: [authGuard]},
       { path: 'admin/dashboard', component: DashboardComponent, canActivate: [authGuard]}
-    ])
+    ]),
+    BrowserAnimationsModule
   ],
   providers: [
     AuthService,
