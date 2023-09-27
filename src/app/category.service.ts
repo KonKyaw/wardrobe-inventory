@@ -9,9 +9,9 @@ export class CategoryService {
   constructor( private db: AngularFireDatabase ) {
   }
 
-  getCategories(): any{
+  getAll(): any{
     const quRef = query(ref(this.database, 'categories'), orderByChild('name'));
-    return listVal(quRef);
+    return listVal(quRef,{keyField: "key"});
   }
 
 }

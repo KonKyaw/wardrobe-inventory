@@ -14,6 +14,10 @@ export class AdminProductsComponent implements OnDestroy{
   filteredProducts: any[] = []; //cannot use interface cos doesn't have key
   subscription: Subscription = new Subscription;
 
+  displayedColumns = ["title", "price", "category", "edit"];
+  // Since the table optimizes for performance, it will not automatically check for changes to the data array.
+  // Instead, when objects are added, removed, or moved on the data array, you can trigger an update to the table's rendered rows by calling its renderRows() method.
+
   constructor( private productService: ProductService ) {
     // this.product$ = this.productService.getAll()
     this.subscription = this.productService.getAll().subscribe((products: Array<any>) =>
@@ -21,7 +25,6 @@ export class AdminProductsComponent implements OnDestroy{
   }
 
   filter(query: string) {
-    
     this.filteredProducts = (query) ?
     this.products.filter(p => p.title.toLowerCase().includes(query.toLowerCase())) :
     this.products;
@@ -31,6 +34,4 @@ export class AdminProductsComponent implements OnDestroy{
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
-  displayedColumns = ["title", "price", "category", "edit"]; // , "category", "price"
-  // Since the table optimizes for performance, it will not automatically check for changes to the data array. Instead, when objects are added, removed, or moved on the data array, you can trigger an update to the table's rendered rows by calling its renderRows() method.
 }

@@ -49,7 +49,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     provideDatabase(() => getDatabase()),
     NgbModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent },
+      { path: '', component: ProductsComponent },
       { path: 'products', component: ProductsComponent },
       { path: 'dashboard', component: DashboardComponent, canActivate: [authGuard]},
       { path: 'login', component: LoginComponent},

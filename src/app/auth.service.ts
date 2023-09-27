@@ -28,6 +28,14 @@ export class AuthService implements OnDestroy {
     const provider = new GoogleAuthProvider();
 
     await signInWithRedirect(this.auth, provider);
+    // setPersistence(this.auth, browserLocalPersistence)
+    // .then(() => {
+    //   signInWithRedirect(this.auth, provider);
+    // })
+    // .catch((error) => {
+    //   const errorCode = error.code;
+    //   const errorMessage = error.message;
+    // });
     
     // After returning from the redirect when your app initializes you can obtain the result
     const result = await getRedirectResult(this.auth);
@@ -37,11 +45,13 @@ export class AuthService implements OnDestroy {
       // This gives you a Facebook Access Token.
       const credential = GoogleAuthProvider.credentialFromResult(result);
       const token = credential?.accessToken;
+      console.log("auth token:", token)
     }
     // As this API can be used for sign-in, linking and reauthentication,
     // check the operationType to determine what triggered this redirect
     // operation.
     const operationType = result?.operationType;
+    console.log("auth operation type:", operationType)
   }
 
   logout(){

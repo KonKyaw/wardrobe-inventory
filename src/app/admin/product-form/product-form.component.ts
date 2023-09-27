@@ -41,7 +41,7 @@ export class ProductFormComponent {
     private route: ActivatedRoute,
     private router: Router
     ) {
-    this.categories$ = this.categoryService.getCategories();
+    this.categories$ = this.categoryService.getAll();
     this.idProduct = this.route.snapshot.paramMap.get('id');
     this.editProduct$ = productService.get(this.idProduct);
     if (this.idProduct) {
@@ -59,11 +59,6 @@ export class ProductFormComponent {
   get price() { return this.productForm.get('price');}
   get category() { return this.productForm.get('category');}
   get imageUrl() { return this.productForm.get('imageUrl');}
-
-  // save (product: any) {
-  //   console.log(product);
-  //   this.productService.create(product);
-  // }
 
   onSubmit(product: any) {
     if(this.idProduct) {
