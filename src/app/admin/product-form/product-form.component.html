@@ -58,15 +58,16 @@
             (click)="delete()">Delete</button>
         </form>
     </div>
+    <!-- <label for="imageInput" 
+        class="image-upload-container btn btn-bwm">
+        <span>Select Image</span>
+        <input #imageInput
+            id="imageInput"
+            type="file"
+            accept="image/*"
+            (change)="onUpload(imageInput)">
+    </label> -->
     <div class="col-md-6">
-        <div class="card" style="width: 18rem;">
-            <img [src]="imageUrl?.value" class="card-img-top">
-            <div class="card-body">
-              <h4 class="card-title">{{ title?.value }}</h4>
-              <p class="card-text"> {{ price?.value | currency: 'JPY': "symbol" }}</p>
-            </div>
-          </div>
+        <product-card [product]="productForm.value" [showActions]="false"></product-card>
     </div>  
-
-
 </div>

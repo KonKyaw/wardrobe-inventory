@@ -2,7 +2,7 @@ import { inject } from "@angular/core";
 import { AuthService } from './auth.service';
 import { Router, RouterStateSnapshot } from "@angular/router";
 import { filter, map, of, switchMap } from "rxjs";
-import { UserService } from "./user.service";
+import { UserService } from "../user.service";
 
 export const adminAuthGuard = (state: RouterStateSnapshot) => {
     const auth = inject(AuthService);

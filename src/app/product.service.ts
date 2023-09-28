@@ -1,14 +1,18 @@
 import { Injectable, inject } from '@angular/core';
-import { Database, getDatabase, list, listVal, object, objectVal, push, query, ref, remove, set, update } from '@angular/fire/database';
+import { Database, getDatabase, listVal, objectVal, push, query, ref, remove, set } from '@angular/fire/database';
+import { Storage } from '@angular/fire/storage';
 import { Observable } from 'rxjs';
 import { AppProduct } from './models/app-product';
+import { getStorage } from 'firebase/storage';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
-  public database: Database = inject(Database);
-  public db = getDatabase();
+  private database: Database = inject(Database);
+  private db = getDatabase();
+  private storage: Storage = inject(Storage);
+  private store = getStorage();
 
   constructor() { }
 
@@ -27,7 +31,6 @@ export class ProductService {
   delete(productId: string) {
     const refId = ref(this.database, 'products/' + productId)
     return remove(refId)
-
   }
 
   getAll() {
@@ -44,4 +47,18 @@ export class ProductService {
     
     return objectVal(refId, {keyField: "key"})
   }
+
+//   uploadImage(image: HTMLInputElement) {
+//     if (!image.files) return
+//     const file: File = image.files[0];
+//     console.log("uploadImage", image.files);
+//     const stoRef = ref(this.store, file.name);
+    
+    
+//     if (file) {
+//       uploadBytes(storageRef, file).then((snapshot) => {
+//         console.log('Uploaded a blob or file!');
+//       });
+//     }
+// }
 }
