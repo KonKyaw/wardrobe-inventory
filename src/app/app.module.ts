@@ -29,6 +29,8 @@ import { ProductService } from './product.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProductFilterComponent } from './products/product-filter/product-filter.component';
 import { ProductCardComponent } from './product-card/product-card.component';
+import { UploadImageService } from './upload-image.service';
+import { DeleteImageService } from './delete-image.service';
 
 @NgModule({
   declarations: [
@@ -69,6 +71,8 @@ import { ProductCardComponent } from './product-card/product-card.component';
   providers: [
     AuthService,
     CategoryService,
+    DeleteImageService,
+    UploadImageService,
     UserService,
     ProductService,
     { provide: FIREBASE_OPTIONS, useValue: environment.firebase }

@@ -1,9 +1,9 @@
 import { Injectable, inject } from '@angular/core';
 import { Database, getDatabase, listVal, objectVal, push, query, ref, remove, set } from '@angular/fire/database';
-import { Storage } from '@angular/fire/storage';
 import { Observable } from 'rxjs';
 import { AppProduct } from './models/app-product';
-import { getStorage } from 'firebase/storage';
+import { DeleteImageService } from './delete-image.service';
+
 
 @Injectable({
   providedIn: 'root'
@@ -11,10 +11,9 @@ import { getStorage } from 'firebase/storage';
 export class ProductService {
   private database: Database = inject(Database);
   private db = getDatabase();
-  private storage: Storage = inject(Storage);
-  private store = getStorage();
-
-  constructor() { }
+  public promiseReturn: any = null;
+  
+  constructor(private deleteImageService: DeleteImageService) { }
 
   create(product: AppProduct) {
     const productRef = ref(this.db, 'products/');
@@ -29,7 +28,16 @@ export class ProductService {
   }
 
   delete(productId: string) {
-    const refId = ref(this.database, 'products/' + productId)
+    const refId = ref(this.database, 'products/' + productId);
+
+    objectVal(refId).subscribe(data => {
+      if(data) {
+        console.log("delete()", data);
+        let product:any = data;
+        this.promiseReturn = this.deleteImageService.deleteImage(product);
+      }
+    })
+
     return remove(refId)
   }
 
@@ -47,18 +55,4 @@ export class ProductService {
     
     return objectVal(refId, {keyField: "key"})
   }
-
-//   uploadImage(image: HTMLInputElement) {
-//     if (!image.files) return
-//     const file: File = image.files[0];
-//     console.log("uploadImage", image.files);
-//     const stoRef = ref(this.store, file.name);
-    
-    
-//     if (file) {
-//       uploadBytes(storageRef, file).then((snapshot) => {
-//         console.log('Uploaded a blob or file!');
-//       });
-//     }
-// }
 }

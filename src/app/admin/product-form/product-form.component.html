@@ -43,30 +43,32 @@
             </div>
         
             <div class="form-group">
-                <label for="image">Image URL</label> 
+                <label for="image">Image URL</label>
+                <div>
+                    <label for="imageInput" 
+                        class="image-upload-container btn btn-bwm">
+                        <input #imageInput
+                            id="imageInput"
+                            type="file"
+                            accept="image/* | .heic"
+                            formtarget="_blank"
+                            (change)="onUpload(imageInput)">
+                    </label>
+                </div>
                 <input formControlName="imageUrl" id="imageUrl" type="text" class="form-control">
             </div>
-            <div class="alert alert-danger" *ngIf="imageUrl?.touched && imageUrl?.invalid">
-                <div *ngIf="imageUrl?.errors?.['pattern']">
+            <div class="alert alert-danger" *ngIf="imageUrl?.touched && !downloadUrl">  <!-- && imageUrl?.invalid -->
+                <!-- <div *ngIf="imageUrl?.errors?.['pattern']"> -->
                     Please enter a valid image url. (eg. https://website/image.jpg)
-                </div>
+                <!-- </div> -->
             </div>
         
             <button class="btn btn-primary" type="submit"
             [disabled]="!productForm.valid">Save</button>
-            <button class="btn btn-danger" type="button"
+            <button *ngIf="isEdit" class="btn btn-danger" type="button"
             (click)="delete()">Delete</button>
         </form>
     </div>
-    <!-- <label for="imageInput" 
-        class="image-upload-container btn btn-bwm">
-        <span>Select Image</span>
-        <input #imageInput
-            id="imageInput"
-            type="file"
-            accept="image/*"
-            (change)="onUpload(imageInput)">
-    </label> -->
     <div class="col-md-6">
         <product-card [product]="productForm.value" [showActions]="false"></product-card>
     </div>  

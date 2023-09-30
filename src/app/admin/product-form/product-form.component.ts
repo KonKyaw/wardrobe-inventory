@@ -5,6 +5,7 @@ import { CategoryService } from 'src/app/category.service';
 import { ProductService } from 'src/app/product.service';
 import { Observable } from 'rxjs';
 import { AppProduct } from 'src/app/models/app-product';
+import { UploadImageService } from 'src/app/upload-image.service';
 
 @Component({
   selector: 'app-product-form',
@@ -15,9 +16,11 @@ export class ProductFormComponent {
   categories$: Observable<any> = new Observable;
   editProduct$: Observable<any> = new Observable;
   private idProduct: string | null = '';
+  public isEdit: boolean = false;
+  public downloadUrl: any = null;
   // public product: AppProduct = {"title": ' ', "price": 0, "category": '', "imageUrl": ''};
 
-  private urlPattern = /^(https?|http?|ftp):\/\/[^\s/$.?#].[^\s]*\.(jpg|jpeg|png|gif|bmp)$/;
+  // private urlPattern = /^(https?|http?|ftp):\/\/[^\s/$.?#].[^\s]*\.(jpg|jpeg|png|gif|bmp)$/;
   
   productForm = new FormGroup({
     title: new FormControl<string>('', [
@@ -32,13 +35,24 @@ export class ProductFormComponent {
       Validators.required
     ]),
     imageUrl: new FormControl<string>('', [
-      Validators.pattern(this.urlPattern)
+        // Validators.pattern(this.urlPattern)
     ])
   });
+
+//   this.imageUrl.valueChanges.subscribe(checked => {
+//     if (checked) {
+//       this.optionBExtra.setValidators([Validators.required, Validators.minLength(5)]);
+//     } else {
+//       this.optionBExtra.setValidators(null);
+//     }
+//     this.optionBExtra.updateValueAndValidity();
+//   });
+// }
     
   constructor(
     private categoryService: CategoryService,
     private productService: ProductService,
+    private uploadImageService: UploadImageService,
     private route: ActivatedRoute,
     private router: Router
     ) {
@@ -46,6 +60,7 @@ export class ProductFormComponent {
     this.idProduct = this.route.snapshot.paramMap.get('id');
     this.editProduct$ = productService.get(this.idProduct);
     if (this.idProduct) {
+      this.isEdit = true;
       this.editProduct$.subscribe(product => {
         // this.product = product;
         this.productForm.setValue({
@@ -75,9 +90,19 @@ export class ProductFormComponent {
     // console.warn(this.productForm.value);
   }
 
-  // onUpload(imageInput: any) {
-  //   this.productService.uploadImage(imageInput);
-  // }
+  async onUpload(imageInput: any) {
+    this.downloadUrl =  this.uploadImageService.uploadImage(imageInput)
+
+      if(this.downloadUrl) {
+        this.downloadUrl.then((link: any) => {
+          this.downloadUrl = link;
+          this.productForm.patchValue({
+            imageUrl: link})
+          console.log("UrlResult", link)
+        })
+      }
+    // console.log("result", this.downloadUrl)
+  }
 
   delete() {
     if (confirm('Are you sure you want to delete this product?') && this.idProduct) {
