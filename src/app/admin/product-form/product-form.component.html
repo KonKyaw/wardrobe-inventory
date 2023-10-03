@@ -52,7 +52,8 @@
                             type="file"
                             accept="image/* | .heic"
                             formtarget="_blank"
-                            (change)="onUpload(imageInput)">
+                            (change)="onImageChange($event)">
+                            <!-- (change)="onUpload(imageInput)"> -->
                     </label>
                 </div>
                 <input formControlName="imageUrl" id="imageUrl" type="text" class="form-control">

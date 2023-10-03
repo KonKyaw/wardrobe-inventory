@@ -4,7 +4,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CategoryService } from 'src/app/category.service';
 import { ProductService } from 'src/app/product.service';
 import { Observable } from 'rxjs';
-import { AppProduct } from 'src/app/models/app-product';
 import { UploadImageService } from 'src/app/upload-image.service';
 
 @Component({
@@ -18,6 +17,7 @@ export class ProductFormComponent {
   private idProduct: string | null = '';
   public isEdit: boolean = false;
   public downloadUrl: any = null;
+  imgFile: any;
   // public product: AppProduct = {"title": ' ', "price": 0, "category": '', "imageUrl": ''};
 
   // private urlPattern = /^(https?|http?|ftp):\/\/[^\s/$.?#].[^\s]*\.(jpg|jpeg|png|gif|bmp)$/;
@@ -39,6 +39,18 @@ export class ProductFormComponent {
     ])
   });
 
+
+//   this.imageUrl.valueChanges.subscribe(checked => {
+//     if (checked) {
+//       this.optionBExtra.setValidators([Validators.required, Validators.minLength(5)]);
+//     } else {
+//       this.optionBExtra.setValidators(null);
+//     }
+//     this.optionBExtra.updateValueAndValidity();
+//   });
+// }
+    
+    
 //   this.imageUrl.valueChanges.subscribe(checked => {
 //     if (checked) {
 //       this.optionBExtra.setValidators([Validators.required, Validators.minLength(5)]);
@@ -90,18 +102,51 @@ export class ProductFormComponent {
     // console.warn(this.productForm.value);
   }
 
-  async onUpload(imageInput: any) {
-    this.downloadUrl =  this.uploadImageService.uploadImage(imageInput)
+  // async onUpload(imageInput: any) {
+  //   this.downloadUrl =  this.uploadImageService.uploadImage(imageInput)
 
-      if(this.downloadUrl) {
-        this.downloadUrl.then((link: any) => {
-          this.downloadUrl = link;
+  //     if(this.downloadUrl) {
+  //       this.downloadUrl.then((link: any) => {
+  //         this.downloadUrl = link;
+  //         this.productForm.patchValue({
+  //           imageUrl: link})
+  //         console.log("UrlResult", link)
+  //       })
+  //     }
+  // }
+
+  onImageChange(e: any) {
+    const reader = new FileReader();
+    if(e.target.files && e.target.files.length) {
+      const imgfile = e.target.files[0];
+      reader.readAsDataURL(imgfile);
+      reader.onload = async () => {
+        await this.resizeImage(reader.result as string).then((resolve: any) => {
+          this.imgFile = resolve;
           this.productForm.patchValue({
-            imageUrl: link})
-          console.log("UrlResult", link)
-        })
-      }
-    // console.log("result", this.downloadUrl)
+            imageUrl: resolve
+          });
+        });
+      };
+    }
+  }
+  
+  resizeImage(imageURL: any): Promise<any> {
+    return new Promise((resolve) => {
+      const image = new Image();
+      image.onload = function () {
+        const canvas = document.createElement('canvas');
+        canvas.width = 300;
+        canvas.height = 400;
+        const ctx = canvas.getContext('2d');
+        if (ctx != null) {
+          ctx.drawImage(image, 0, 0, 300, 400);
+        }
+        var data = canvas.toDataURL('image/jpeg', 1);
+        resolve(data);
+      };
+      image.src = imageURL;
+    });
   }
 
   delete() {

@@ -18,7 +18,7 @@ export class ProductService {
   create(product: AppProduct) {
     const productRef = ref(this.db, 'products/');
     console.log("create()", product)
-    push(productRef, product);
+    push(productRef, product); // can return then able reference to get key and reference.
     // set(push(productRef), { product });
   }
 

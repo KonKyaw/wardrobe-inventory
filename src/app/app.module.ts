@@ -63,7 +63,7 @@ import { DeleteImageService } from './delete-image.service';
       { path: 'login', component: LoginComponent},
       { path: 'admin/products/new', component: ProductFormComponent, canActivate: [authGuard, adminAuthGuard]},
       { path: 'admin/products/:id', component: ProductFormComponent, canActivate: [authGuard, adminAuthGuard]},
-      { path: 'admin/products', component: AdminProductsComponent, canActivate: [authGuard]},
+      { path: 'admin/products', component: AdminProductsComponent, canActivate: [authGuard, adminAuthGuard]},
       { path: 'admin/dashboard', component: DashboardComponent, canActivate: [authGuard]}
     ]),
     BrowserAnimationsModule
