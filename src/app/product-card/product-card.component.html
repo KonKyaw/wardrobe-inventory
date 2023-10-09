@@ -1,11 +1,16 @@
 <div *ngIf="product.title" class="card">
     <img *ngIf="product.imageUrl" class="card-img-top"
         [src]="product.imageUrl" alt="{{ product.title }}" >
-    <div class="card-body">
-        <h4 class="card-title">{{ product.title }}</h4>
-        <p class="card-text"> {{ product.price | currency: 'JPY': "symbol" }}</p>
-        <div class="d-flex">
-            <a *ngIf="showActions" href="#" class="btn btn-primary">Edit</a>
+    <div class="card-body d-flex flex-column">
+        <h3 class="card-title">{{ product.title }}</h3>
+        <h4 class="card-subtitle text-muted"> {{ product.brand }}</h4>
+        <div class="d-flex flex-row align-items-stretch justify-content-between mt-auto">
+            <p class="card-text size mb-0"> {{ product.size }}</p>
+            <p class="card-text mb-0"> {{ product.price | currency: 'JPY': "symbol" }}</p>
+        </div>
+        <div class="mt-auto pt-12">
+            <a *ngIf="showActions" [routerLink]="['/admin/products/', product.key]" class="btn btn-primary">Details</a>
+            <!-- <a *ngIf="showActions" href="#" class="btn btn-primary">Edit</a> -->
         </div>
     </div>
 </div>

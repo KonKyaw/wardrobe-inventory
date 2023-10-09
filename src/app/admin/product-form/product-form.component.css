@@ -1,3 +1,29 @@
 #imageInput {
     color: transparent;
 }
+
+.form-group {
+    margin-bottom: 12px;
+}
+
+label {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 22px;
+    font-family: Roboto, sans-serif;
+    margin-bottom: 4px;
+}
+
+.input-form {
+    margin-top: 4px;
+}
+
+.btn-bottom {
+    margin-top: 6px;
+    margin-bottom: 12px;
+    margin-right: 20px;
+}
+
+/* option[value=""][disabled] {
+    display: none;
+  } */

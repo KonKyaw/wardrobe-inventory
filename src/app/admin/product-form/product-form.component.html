@@ -4,14 +4,38 @@
             <div class="form-group">
                 <label for="title">Title</label>
                 <input id="title" type="text" formControlName="title" class="form-control">
+                <div class="alert alert-danger" *ngIf="title?.touched && title?.invalid">
+                    <div *ngIf="title?.errors?.['required']">
+                        Title is required.
+                    </div>
+                    <div *ngIf="title?.errors?.['minlength']">
+                        Title should be at least {{ title?.errors?.['minlength'].requiredLength }} letters long.
+                    </div>
+                </div>
             </div>
-            <div class="alert alert-danger" *ngIf="title?.touched && title?.invalid">
-                <div *ngIf="title?.errors?.['required']">
-                    Title is required.
-                </div>
-                <div *ngIf="title?.errors?.['minlength']">
-                    Title should be at least {{ title?.errors?.['minlength'].requiredLength }} letters long.
-                </div>
+
+            <div class="form-group">
+                <label for="brand">Brand</label>
+                <select formControlName="brand" id="brand" class="form-control">
+                    <option value="" disabled selected hidden></option>
+                    <option value="Add new brand">- Add new brand -</option>
+                    <option *ngFor="let b of brands$ | async" [value]="b">
+                        {{ b }}
+                    </option>
+                </select>
+                <input *ngIf="brand?.value === 'Add new brand'" id="name" type="text" [formControl]="inputBrand" class="form-control input-form">
+            </div>
+
+            <div class="form-group">
+                <label for="size">Size</label>
+                <select formControlName="size" id="size" class="form-control">
+                    <option value="" disabled selected hidden></option>
+                    <option *ngFor="let s of sizes$ | async" [value]="s.name">
+                        {{ s.name }}
+                    </option>
+                    <option value="Others">- others -</option>
+                </select>
+                <input *ngIf="size?.value === 'Others'" id="name" type="text" [formControl]="inputSize" class="form-control input-form">
             </div>
         
             <div class="form-group">
@@ -20,25 +44,27 @@
                     <span class="input-group-text">￥</span>
                     <input formControlName="price" name="price" id="price" type="number" class="form-control">
                 </div>
-            </div>
-            <div class="alert alert-danger" *ngIf="price?.touched && price?.invalid">
-                <div *ngIf="price?.errors?.['min']">
-                    Price cannot be negative.
+                <div class="alert alert-danger" *ngIf="price?.touched && price?.invalid">
+                    <div *ngIf="price?.errors?.['min']">
+                        Price cannot be negative.
+                    </div>
                 </div>
             </div>
             
             <div class="form-group">
                 <label for="category">Category</label>
                 <select formControlName="category" id="category" class="form-control">
-                    <option value=""></option>
+                    <option value="" disabled selected hidden></option>
                     <option *ngFor="let c of categories$ | async" [value]="c.name">
                         {{ c.name }}
                     </option>
                 </select>
-            </div>
-            <div class="alert alert-danger" *ngIf="category?.touched && category?.invalid">
-                <div *ngIf="category?.errors?.['required']">
-                    Category is required.
+                <!-- <input *ngIf="category?.value === 'Top'" id="name" type="text" [formControl]="inputCategory"> -->
+                <!-- <input *ngIf="category?.value === 'Top'" #inputCategory (change)="onInputCategory($event)" type="text" class="form-control"> -->
+                <div class="alert alert-danger" *ngIf="category?.touched && category?.invalid">
+                    <div *ngIf="category?.errors?.['required']">
+                        Category is required.
+                    </div>
                 </div>
             </div>
         
@@ -57,16 +83,21 @@
                     </label>
                 </div>
                 <input formControlName="imageUrl" id="imageUrl" type="text" class="form-control">
+                <div class="alert alert-danger" *ngIf="imageUrl?.touched && !downloadUrl">  <!-- && imageUrl?.invalid -->
+                    <!-- <div *ngIf="imageUrl?.errors?.['pattern']"> -->
+                        Please enter a valid image url. (eg. https://website/image.jpg)
+                    <!-- </div> -->
+                </div>
             </div>
-            <div class="alert alert-danger" *ngIf="imageUrl?.touched && !downloadUrl">  <!-- && imageUrl?.invalid -->
-                <!-- <div *ngIf="imageUrl?.errors?.['pattern']"> -->
-                    Please enter a valid image url. (eg. https://website/image.jpg)
-                <!-- </div> -->
+
+            <div class="form-group">
+                <label for="title">Note</label>
+                <input id="title" type="text" formControlName="note" class="form-control">
             </div>
         
-            <button class="btn btn-primary" type="submit"
+            <button class="btn btn-primary btn-bottom" type="submit"
             [disabled]="!productForm.valid">Save</button>
-            <button *ngIf="isEdit" class="btn btn-danger" type="button"
+            <button *ngIf="isEdit" class="btn btn-danger btn-bottom" type="button"
             (click)="delete()">Delete</button>
         </form>
     </div>

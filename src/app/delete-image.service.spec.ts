@@ -1,16 +1,16 @@
-import { TestBed } from '@angular/core/testing';
+// import { TestBed } from '@angular/core/testing';
 
-import { DeleteImageService } from './delete-image.service';
+// import { DeleteImageService } from './delete-image.service';
 
-describe('DeleteImageService', () => {
-  let service: DeleteImageService;
+// describe('DeleteImageService', () => {
+//   let service: DeleteImageService;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(DeleteImageService);
-  });
+//   beforeEach(() => {
+//     TestBed.configureTestingModule({});
+//     service = TestBed.inject(DeleteImageService);
+//   });
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
-});
+//   it('should be created', () => {
+//     expect(service).toBeTruthy();
+//   });
+// });

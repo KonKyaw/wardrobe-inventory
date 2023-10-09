@@ -1,0 +1,14 @@
+th {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 22px;
+    font-family: Roboto, sans-serif;
+}
+
+.filter-text {
+    padding: 16px;
+}
+
+.table-wrapper {
+    overflow: auto;
+}

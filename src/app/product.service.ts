@@ -2,8 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { Database, getDatabase, listVal, objectVal, push, query, ref, remove, set } from '@angular/fire/database';
 import { Observable } from 'rxjs';
 import { AppProduct } from './models/app-product';
-import { DeleteImageService } from './delete-image.service';
-
+// import { DeleteImageService } from './delete-image.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +12,7 @@ export class ProductService {
   private db = getDatabase();
   public promiseReturn: any = null;
   
-  constructor(private deleteImageService: DeleteImageService) { }
+  constructor() { }
 
   create(product: AppProduct) {
     const productRef = ref(this.db, 'products/');
@@ -30,13 +29,13 @@ export class ProductService {
   delete(productId: string) {
     const refId = ref(this.database, 'products/' + productId);
 
-    objectVal(refId).subscribe(data => {
-      if(data) {
-        console.log("delete()", data);
-        let product:any = data;
-        this.promiseReturn = this.deleteImageService.deleteImage(product);
-      }
-    })
+    // objectVal(refId).subscribe(data => {
+    //   if(data) {
+    //     console.log("delete()", data);
+    //     let product:any = data;
+    //     this.promiseReturn = this.deleteImageService.deleteImage(product);
+    //   }
+    // })
 
     return remove(refId)
   }

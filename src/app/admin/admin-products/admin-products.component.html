@@ -7,52 +7,68 @@
     (keyup)="filter(query.value)"
     type="text" class="form-control" placeholder="Search...">
 </p>
-<table mat-table
-    [dataSource]="filteredProducts">
-    <ng-container matColumnDef="title">
-        <th mat-header-cell *matHeaderCellDef> Title </th>
-        <td mat-cell *matCellDef="let product"> {{product.title}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="price">
-        <th mat-header-cell *matHeaderCellDef> Price </th>
-        <td mat-cell *matCellDef="let product"> {{product.price}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="category">
-        <th mat-header-cell *matHeaderCellDef> Category </th>
-        <td mat-cell *matCellDef="let product"> {{product.category}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="edit">
-        <th mat-header-cell *matHeaderCellDef> Edit </th>
-        <td mat-cell *matCellDef="let product">
-            <a [routerLink]="['/admin/products/', product.key]">
-            Edit </a>
-        </td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-</table>
-
-<!-- <table class="table">
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>Price</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let p of filteredProducts">
-        <tr *ngFor="let p of product$ | async">
-            <td>{{ p.title }}</td>
-            <td>{{ p.price }}</td>
-            <td>
-                <a [routerLink]="['/admin/products/', p.key]">Edit</a>
+<div class="table-wrapper">
+    <table mat-table
+    [dataSource]="dataSource"
+    matSort (matSortChange)="announceSortChange($event)"
+       class="mat-elevation-z8">
+        <ng-container matColumnDef="title">
+            <th mat-header-cell *matHeaderCellDef> Title </th>
+            <td mat-cell *matCellDef="let product"> {{product.title}} </td>
+        </ng-container>
+        <ng-container matColumnDef="brand">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Brand"> Brand </th>
+            <td mat-cell *matCellDef="let product"> {{product.brand}} </td>
+        </ng-container>
+        <ng-container matColumnDef="size">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Size"> Size </th>
+            <td mat-cell *matCellDef="let product"> {{product.size}} </td>
+        </ng-container>
+        <ng-container matColumnDef="price">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Price"> Price </th>
+            <td mat-cell *matCellDef="let product"> {{product.price}} </td>
+        </ng-container>
+        <ng-container matColumnDef="category">
+            <th mat-header-cell *matHeaderCellDef  mat-sort-header sortActionDescription="Sort by Category"> Category </th>
+            <td mat-cell *matCellDef="let product"> {{product.category}} </td>
+        </ng-container>
+        <ng-container matColumnDef="note">
+            <th mat-header-cell *matHeaderCellDef> Note </th>
+            <td mat-cell *matCellDef="let product"> {{product.note}} </td>
+        </ng-container>
+        <ng-container matColumnDef="updatedUser">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Updated User"> Updated User </th>
+            <td mat-cell *matCellDef="let product"> {{product.updatedUser}} </td>
+        </ng-container>
+        <ng-container matColumnDef="updatedDate">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Last Updated"> Last Updated </th>
+            <td mat-cell *matCellDef="let product"> {{product.updatedDate}} </td>
+        </ng-container>
+        <ng-container matColumnDef="createdUser">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Created User"> Created User </th>
+            <td mat-cell *matCellDef="let product"> {{product.createdUser}} </td>
+        </ng-container>
+        <ng-container matColumnDef="createdDate">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Created"> Created Date </th>
+            <td mat-cell *matCellDef="let product"> {{product.createdDate}} </td>
+        </ng-container>
+        <ng-container matColumnDef="edit">
+            <th mat-header-cell *matHeaderCellDef> Edit </th>
+            <td mat-cell *matCellDef="let product">
+                <a [routerLink]="['/admin/products/', product.key]">
+                Edit </a>
             </td>
-        </tr>
-    </tbody>
-</table> -->
+        </ng-container>
 
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell filter-text" colspan="4">No data matching the filter "{{query.value}}"</td>
+        </tr>
+    </table>
+</div>
+<mat-paginator
+    [pageSizeOptions]="[10, 25, 50]"
+    showFirstLastButtons
+    aria-label="Select page of inventory">
+</mat-paginator>

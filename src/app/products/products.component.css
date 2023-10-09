@@ -1,4 +1,24 @@
 .col {
-    margin-bottom: 20px;
-    padding: 0 2vw 0 2vw;
+    margin-bottom: 3vw;
+    padding: 0 1.5vw 0 1.5vw;
+}
+
+.row {
+    margin-right: calc(-0.3 * var(--bs-gutter-x));
+}
+
+@media screen and (max-width: 425px) {
+    product-card {
+        .card-body {
+            padding: 8px;
+        }
+
+        .card-title {
+            font-size: 14px;
+        }
+
+        .card-subtitle {
+            font-size: 12px;
+        }
+    }
 }

@@ -1,13 +1,22 @@
 {
   "projects": {
     "default": "wardrobe-inventory-15a18",
-    "wardrobe-inventory-15a18": "wardrobe-inventory-15a18"
+    "prod": "wardrobe-inventory-15a18",
+    "dev": "wardrobe-inventory-42f37",
+    "demo": "fir-wardrobe-inventory"
   },
   "targets": {
     "wardrobe-inventory-15a18": {
       "hosting": {
-        "wardrobe-inventory": [
+        "prod": [
           "wardrobe-inventory-15a18"
+        ]
+      }
+    },
+    "fir-wardrobe-inventory": {
+      "hosting": {
+        "demo": [
+          "fir-wardrobe-inventory"
         ]
       }
     }
