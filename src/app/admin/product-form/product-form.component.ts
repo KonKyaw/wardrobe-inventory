@@ -31,14 +31,11 @@ export class ProductFormComponent {
   productForm = new FormGroup({
     title: new FormControl<string>('', [
       Validators.required,
-      Validators.minLength(5)
+      Validators.minLength(4),
+      Validators.maxLength(40)
     ]),
-    brand: new FormControl<string>('', [
-      // Validators.pattern(this.urlPattern)
-    ]),
-    size: new FormControl<string>('', [
-      // Validators.pattern(this.urlPattern)
-    ]),
+    brand: new FormControl<string>('', []),
+    size: new FormControl<string>('', []),
     price: new FormControl<number>(0, [
       // Validators.required,
       Validators.min(0)
@@ -49,14 +46,17 @@ export class ProductFormComponent {
     imageUrl: new FormControl<string>('', [
         // Validators.pattern(this.urlPattern)
     ]),
-    note: new FormControl<string>('', [
-      // Validators.pattern(this.urlPattern)
-    ])
+    note: new FormControl<string>('', [])
   });
 
-  inputBrand = new FormControl('');
-  inputSize = new FormControl('');
-
+  inputBrand = new FormControl<string>('', [
+    Validators.required,
+    Validators.maxLength(15)
+  ]);
+  inputSize = new FormControl<string>('', [
+    Validators.required,
+    Validators.maxLength(5)
+  ]);
 //   this.imageUrl.valueChanges.subscribe(checked => {
 //     if (checked) {
 //       this.optionBExtra.setValidators([Validators.required, Validators.minLength(5)]);
@@ -115,11 +115,13 @@ export class ProductFormComponent {
 
   onSubmit(product: any) {
     const currDateTime = this.datePipe.transform(new Date(), 'yyyy-MM-dd HH:mm:ss');
-    if(this.brand && this.brand.value == 'Add new brand' && this.inputBrand.value) {
+    if(this.brand && this.brand.value == 'Add new brand') {
       product.brand = this.inputBrand.value;
-      this.brandService.create(this.inputBrand.value);
+      if(this.inputBrand.value) {
+        this.brandService.create(this.inputBrand.value);
+      }
     }
-    if(this.size && this.size.value == 'Others' && this.inputSize.value) {
+    if(this.size && this.size.value == 'Others') {
       product.size = this.inputSize.value;
     }
     if(this.idProduct) {
@@ -156,6 +158,7 @@ export class ProductFormComponent {
       reader.onload = async () => {
         await this.resizeImage(reader.result as string).then((resolve: any) => {
           this.imgFile = resolve;
+          this.downloadUrl = true;
           this.productForm.patchValue({
             imageUrl: resolve
           });

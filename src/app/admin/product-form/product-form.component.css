@@ -18,11 +18,23 @@ label {
     margin-top: 4px;
 }
 
+.image-upload-container, .image-input {
+    max-width: 150px;  
+}
+
 .btn-bottom {
     margin-top: 6px;
     margin-bottom: 12px;
     margin-right: 20px;
 }
+
+.req {
+    color: red;
+}
+
+/* *:required {
+    background-color: pink;
+} */
 
 /* option[value=""][disabled] {
     display: none;

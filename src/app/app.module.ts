@@ -10,6 +10,8 @@ import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
@@ -55,6 +57,8 @@ import { ProductCardComponent } from './product-card/product-card.component';
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
+    MatTooltipModule,
+    MatIconModule,
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,

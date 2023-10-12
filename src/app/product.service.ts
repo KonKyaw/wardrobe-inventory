@@ -43,9 +43,6 @@ export class ProductService {
   getAll() {
     const quRef = query(ref(this.database, 'products')) // , orderByChild('name'));
 
-    listVal(quRef, {keyField: "key"}).subscribe(data => 
-      console.log("getAll.product.service", data)
-      )
     return listVal(quRef, {keyField: "key"});
   }
 

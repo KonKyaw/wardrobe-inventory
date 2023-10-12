@@ -9,4 +9,5 @@ import { AppProduct } from '../models/app-product';
 export class ProductCardComponent {
   @Input('product') product: any | AppProduct = {"title": '', "price": 0, "category": '', "imageUrl": ''};
   @Input('showActions') showActions = true;
+  @Input('inputBrand') inputBrand: string | null = '';
 }

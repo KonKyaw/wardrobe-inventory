@@ -2,14 +2,17 @@
     <div class="col-md-6">
         <form [formGroup]="productForm" (ngSubmit)="onSubmit(productForm.value)">
             <div class="form-group">
-                <label for="title">Title</label>
-                <input id="title" type="text" formControlName="title" class="form-control">
+                <label for="title">Title<span class="req">*</span></label>
+                <input id="title" type="text" formControlName="title" class="form-control" required>
                 <div class="alert alert-danger" *ngIf="title?.touched && title?.invalid">
                     <div *ngIf="title?.errors?.['required']">
                         Title is required.
                     </div>
                     <div *ngIf="title?.errors?.['minlength']">
                         Title should be at least {{ title?.errors?.['minlength'].requiredLength }} letters long.
+                    </div>
+                    <div *ngIf="title?.errors?.['maxlength']">
+                        Maximum Title length is {{ title?.errors?.['maxlength'].requiredLength }} letters long.
                     </div>
                 </div>
             </div>
@@ -24,6 +27,14 @@
                     </option>
                 </select>
                 <input *ngIf="brand?.value === 'Add new brand'" id="name" type="text" [formControl]="inputBrand" class="form-control input-form">
+                <div class="alert alert-warning" *ngIf="brand?.value === 'Add new brand' && inputBrand?.touched && inputBrand?.invalid">
+                    <div *ngIf="inputBrand?.errors?.['required']">
+                        Please enter brand
+                    </div>
+                    <div *ngIf="inputBrand?.errors?.['maxlength']">
+                        Maximum Brand length is {{ inputBrand.errors?.['maxlength'].requiredLength }} letters long.
+                    </div>
+                </div>
             </div>
 
             <div class="form-group">
@@ -36,6 +47,14 @@
                     <option value="Others">- others -</option>
                 </select>
                 <input *ngIf="size?.value === 'Others'" id="name" type="text" [formControl]="inputSize" class="form-control input-form">
+                <div class="alert alert-warning" *ngIf="size?.value === 'Others' && inputSize?.touched && inputSize?.invalid">
+                    <div *ngIf="inputSize?.errors?.['required']">
+                        Please enter size
+                    </div>
+                    <div *ngIf="inputSize?.errors?.['maxlength']">
+                        Maximum Size length is {{ inputSize.errors?.['maxlength'].requiredLength }} letters long.
+                    </div>
+                </div>
             </div>
         
             <div class="form-group">
@@ -52,7 +71,7 @@
             </div>
             
             <div class="form-group">
-                <label for="category">Category</label>
+                <label for="category">Category<span class="req">*</span></label>
                 <select formControlName="category" id="category" class="form-control">
                     <option value="" disabled selected hidden></option>
                     <option *ngFor="let c of categories$ | async" [value]="c.name">
@@ -69,25 +88,33 @@
             </div>
         
             <div class="form-group">
-                <label for="image">Image URL</label>
-                <div>
+                <label for="image">Image URL<span class="req">*</span></label>
+                <div class="d-flex justify-content-between align-items-center">
                     <label for="imageInput" 
                         class="image-upload-container btn btn-bwm">
                         <input #imageInput
                             id="imageInput"
+                            class="image-input"
                             type="file"
                             accept="image/* | .heic"
                             formtarget="_blank"
                             (change)="onImageChange($event)">
                             <!-- (change)="onUpload(imageInput)"> -->
                     </label>
+                    <div>
+                        <mat-icon matTooltip="Enter a valid image url. (eg. https://website/image.jpg)">
+                            help_outline
+                        </mat-icon>
+                    </div>
                 </div>
                 <input formControlName="imageUrl" id="imageUrl" type="text" class="form-control">
-                <div class="alert alert-danger" *ngIf="imageUrl?.touched && !downloadUrl">  <!-- && imageUrl?.invalid -->
-                    <!-- <div *ngIf="imageUrl?.errors?.['pattern']"> -->
+                
+                
+                <!-- <div class="alert alert-danger" *ngIf="imageUrl?.touched && !downloadUrl">  -- && imageUrl?.invalid --
+                    <div *ngIf="imageUrl?.errors?.['pattern'] || imageUrl?.value ==''">
                         Please enter a valid image url. (eg. https://website/image.jpg)
-                    <!-- </div> -->
-                </div>
+                    </div>
+                </div> -->
             </div>
 
             <div class="form-group">
@@ -96,12 +123,13 @@
             </div>
         
             <button class="btn btn-primary btn-bottom" type="submit"
-            [disabled]="!productForm.valid">Save</button>
+            [disabled]="
+            !productForm.valid">Save</button> <!-- || ( brand?.value === 'Add new brand' && !inputBrand.valid ) || ( size?.value === 'Others' && !inputSize.valid)  -->
             <button *ngIf="isEdit" class="btn btn-danger btn-bottom" type="button"
             (click)="delete()">Delete</button>
         </form>
     </div>
     <div class="col-md-6">
-        <product-card [product]="productForm.value" [showActions]="false"></product-card>
+        <product-card [inputBrand]="inputBrand.value" [product]="productForm.value" [showActions]="false"></product-card>
     </div>  
 </div>

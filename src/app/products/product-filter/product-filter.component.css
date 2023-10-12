@@ -3,7 +3,11 @@
     z-index: 0;
 }
 
-@media screen and (max-width: 767.98px) {
+.group-header {
+    text-align: center;
+}
+
+@media (max-width: 767.98px) {
     .list-group-item {
         font-size: 10px;
         padding: 5px;

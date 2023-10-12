@@ -24,7 +24,9 @@
     padding-top: 12px !important;
 }
 
-.btn-primary {
-    /* position: absolute;
-    bottom: 6px; */
+@media (max-width: 425px) {
+    .btn-primary{
+        padding: 4px 8px;
+        font-size: 12px;
+    }
 }

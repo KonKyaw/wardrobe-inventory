@@ -7,18 +7,18 @@
     margin-right: calc(-0.3 * var(--bs-gutter-x));
 }
 
-@media screen and (max-width: 425px) {
-    product-card {
+@media (max-width: 425px) {
+    :host ::ng-deep product-card
         .card-body {
             padding: 8px;
         }
-
+    :host ::ng-deep product-card
         .card-title {
             font-size: 14px;
+            line-height: 16px;
         }
-
+    :host ::ng-deep product-card
         .card-subtitle {
             font-size: 12px;
-        }
-    }
+        }    
 }
