@@ -1,19 +1,19 @@
 import { AfterViewInit, Component, OnDestroy, ViewChild } from '@angular/core';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { Subscription } from 'rxjs';
-import { AppProduct } from 'src/app/models/app-product';
-import { ProductService } from 'src/app/product.service';
+import { AppProduct } from 'shared/models/app-product';
+import { ProductService } from 'shared/services/product.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
-  selector: 'app-admin-products',
-  templateUrl: './admin-products.component.html',
-  styleUrls: ['./admin-products.component.css']
+  selector: 'app-admin-dashboard',
+  templateUrl: './admin-dashboard.component.html',
+  styleUrls: ['./admin-dashboard.component.css']
 })
 
-export class AdminProductsComponent implements OnDestroy, AfterViewInit{
+export class AdminDashboardComponent implements OnDestroy, AfterViewInit{
   // product$: any = new Observable;
   products: AppProduct[] = [];
   filteredProducts: AppProduct[] = [];

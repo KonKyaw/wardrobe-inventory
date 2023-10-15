@@ -1,0 +1,24 @@
+<nav class="navbar bg-body-tertiary rounded" aria-label="Eleventh navbar example">
+    <div class="container d-flex">
+      <div class="d-flex flex-row justify-content-between align-items-center">
+        <img routerLink="/" src="favicon.ico" alt="icon-wardrobe" width="20px">
+        <a class="navbar-brand" routerLink="/">Wardrobe</a>
+        
+      <!-- to do: add alert pop-up if not admin -->
+      <a class="nav-link navbar-nav p-2" routerLink="admin/products">Dashboard</a>
+      </div>
+      
+      <a *ngIf="!auth.user" class="nav-link navbar-nav p-2 ml-auto" routerLink="/login">Login</a>
+      <a ngbDropdown *ngIf="auth.user" class="nav-link dropdown">
+      <a ngbDropdownToggle class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+        {{ this.auth.user.displayName }}
+      </a>
+        <ul ngbDropdownMenu class="dropdown-menu">
+          <!-- <li><a class="dropdown-item" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" routerLink="admin/products">Profile</a></li> -->
+          <li>
+            <a class="dropdown-item" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" (click)="logout()">Log Out</a>
+          </li>
+        </ul>
+      </a>
+    </div>
+  </nav>

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthService } from 'src/app/auth-guard/auth.service';
+import { AuthService } from 'shared/services/auth-guard/auth.service';
 
 @Component({
   selector: 'navbar',

@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BrandService } from 'src/app/brand.service';
-import { CategoryService } from 'src/app/category.service';
-import { SizeService } from 'src/app/size.service';
-import { ProductService } from 'src/app/product.service';
+import { BrandService } from 'shared/services/brand.service';
+import { CategoryService } from 'shared/services/category.service';
+import { SizeService } from 'shared/services/size.service';
+import { ProductService } from 'shared/services/product.service';
 import { Observable } from 'rxjs';
-import { AuthService } from 'src/app/auth-guard/auth.service';
+import { AuthService } from 'shared/services/auth-guard/auth.service';
 import { User } from '@angular/fire/auth';
 // import { UploadImageService } from 'src/app/upload-image.service';
 

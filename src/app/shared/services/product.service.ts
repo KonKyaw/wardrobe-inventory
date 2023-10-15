@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { Database, getDatabase, listVal, objectVal, push, query, ref, remove, set } from '@angular/fire/database';
 import { Observable } from 'rxjs';
-import { AppProduct } from './models/app-product';
+import { AppProduct } from 'shared/models/app-product';
 // import { DeleteImageService } from './delete-image.service';
 
 @Injectable({
