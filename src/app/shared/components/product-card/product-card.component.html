@@ -6,7 +6,8 @@
         <h4 *ngIf="inputBrand" class="card-subtitle text-muted"> {{ inputBrand }}</h4>
         <h4 *ngIf="!inputBrand" class="card-subtitle text-muted"> {{ product.brand }}</h4>
         <div class="d-flex flex-row align-items-stretch justify-content-between mt-auto">
-            <p class="card-text size mb-0"> {{ product.size }}</p>
+            <p *ngIf="inputSize" class="card-text size mb-0"> {{ inputSize }} </p>
+            <p *ngIf="!inputSize" class="card-text size mb-0"> {{ product.size }} </p>
             <p class="card-text mb-0"> {{ product.price | currency: 'JPY': "symbol" }}</p>
         </div>
         <div class="mt-auto pt-12 align-self-center">

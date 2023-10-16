@@ -130,6 +130,10 @@
         </form>
     </div>
     <div class="col-md-6">
-        <product-card [inputBrand]="inputBrand.value" [product]="productForm.value" [showActions]="false"></product-card>
+        <product-card
+        [product]="productForm.value"
+        [inputBrand]="inputBrand.value"
+        [inputSize]="inputSize.value"
+        [showActions]="false"></product-card>
     </div>  
 </div>

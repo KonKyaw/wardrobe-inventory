@@ -1,6 +1,6 @@
 import { OnDestroy, inject, Injectable } from '@angular/core';
-import { Auth, GoogleAuthProvider, signInWithRedirect, User, authState, user } from '@angular/fire/auth';
-import { ActivatedRoute } from '@angular/router';
+import { Auth, GoogleAuthProvider, signInWithRedirect, User, authState } from '@angular/fire/auth';
+import { ActivatedRoute, Router } from '@angular/router';
 import { getRedirectResult } from 'firebase/auth';
 import { Subscription } from 'rxjs';
 
@@ -14,11 +14,11 @@ export class AuthService implements OnDestroy {
   authState$ = authState(this.auth);
   authStateSubscription: Subscription;
 
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute, private router: Router) {
     this.authStateSubscription = this.authState$.subscribe((aUser: User | null) => {
         //handle auth state changes here. Note, that user will be null if there is no currently logged in user.
         this.user = aUser;
-        console.log("authService", this.user);
+        // console.log("authService", this.user);
     })
   }
 
@@ -28,6 +28,7 @@ export class AuthService implements OnDestroy {
     const provider = new GoogleAuthProvider();
 
     await signInWithRedirect(this.auth, provider);
+
     // setPersistence(this.auth, browserLocalPersistence)
     // .then(() => {
     //   signInWithRedirect(this.auth, provider);
@@ -38,6 +39,7 @@ export class AuthService implements OnDestroy {
     // });
     
     // After returning from the redirect when your app initializes you can obtain the result
+    
     const result = await getRedirectResult(this.auth);
     if (result) {
       // This is the signed-in user
@@ -52,10 +54,11 @@ export class AuthService implements OnDestroy {
     // operation.
     const operationType = result?.operationType;
     console.log("auth operation type:", operationType)
-  }
+      }
 
   logout(){
     this.auth.signOut();
+    this.router.navigate(['/']);
   }
 
   ngOnDestroy() {

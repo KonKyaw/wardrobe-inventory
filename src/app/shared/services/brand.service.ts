@@ -15,7 +15,6 @@ export class BrandService {
 
   create(brand: string) {
     const brandRef = ref(this.db, 'brands/');
-    console.log("create()", brand)
     push(brandRef, brand); // can return then able reference to get key and reference.
   }
 }

@@ -6,7 +6,7 @@ import { AppProduct } from '../shared/models/app-product';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
-  styleUrls: ['./products.component.css']
+  styleUrls: ['./products.component.css'],
 })
 export class ProductsComponent {
   products: Array<AppProduct> = [];
@@ -15,26 +15,26 @@ export class ProductsComponent {
   productsService: any;
   category: string | null = '';
 
-  constructor(
-    route: ActivatedRoute,
-    productService: ProductService) {
-      productService.getAll().subscribe((products: Array<any>) => {
-        this.products = products;
-        // this.products$ = productService.getAll();
+  constructor(route: ActivatedRoute, productService: ProductService) {
+    productService.getAll().subscribe((products: Array<any>) => {
+      this.products = products;
+      // this.products$ = productService.getAll();
 
-        //needs refactoring with switchMap
-        //Dealing with Multiple Asynchronous Operations
-        route.queryParamMap.subscribe(params => {  
-          this.category = params.get('category');
-  
-          if(this.category) {
-            this.category = this.category.toLowerCase();
-          }
-  
-          this.filteredProducts = (this.category) ?
-          this.products.filter(p => p.category.toLowerCase() === this.category) :
-          this.products;
-        });
+      //needs refactoring with switchMap
+      //Dealing with Multiple Asynchronous Operations
+      route.queryParamMap.subscribe((params) => {
+        this.category = params.get('category');
+
+        if (this.category) {
+          this.category = this.category.toLowerCase();
+        }
+
+        this.filteredProducts = this.category
+          ? this.products.filter(
+              (p) => p.category.toLowerCase() === this.category
+            )
+          : this.products;
       });
-    }
+    });
   }
+}

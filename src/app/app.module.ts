@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -17,7 +16,6 @@ import { CoreModule } from './core/core.module';
 import { SharedModule } from 'shared/shared.module';
 import { AdminModule } from './admin/admin.module';
 import { ProductsComponent } from './products/products.component';
-import { LoginComponent } from './core/login/login.component';
 import { ProductFilterComponent } from './products/product-filter/product-filter.component';
 // import { UploadImageService } from './upload-image.service';
 // import { DeleteImageService } from './delete-image.service';
@@ -34,12 +32,6 @@ import { ProductFilterComponent } from './products/product-filter/product-filter
     provideAuth(() => getAuth()),
     provideDatabase(() => getDatabase()),
     NgbModule,
-    RouterModule.forRoot([
-      
-      { path: 'products', component: ProductsComponent },
-      { path: 'login', component: LoginComponent },
-      { path: '', component: ProductsComponent },
-    ]),
     BrowserAnimationsModule,
   ],
   providers: [{ provide: FIREBASE_OPTIONS, useValue: environment.firebase }],

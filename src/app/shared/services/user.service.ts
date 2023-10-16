@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { User } from '@angular/fire/auth';
-import { getDatabase, ref, set, Database, object, objectVal } from '@angular/fire/database';
+import { getDatabase, ref, set, Database, objectVal } from '@angular/fire/database';
 import { AppUser } from 'shared/models/app-user';
 import { Observable } from 'rxjs';
 
@@ -15,7 +15,6 @@ export class UserService {
   constructor() { }
 
   save(user: User) {
-    console.log("save()", this.db);
     set(ref(this.db, 'users/' + user.uid + '/name'), user.displayName);
     set(ref(this.db, 'users/' + user.uid + '/email'), user.email);
     // set(ref(this.db, 'users/' + user.uid), {
@@ -24,9 +23,9 @@ export class UserService {
     // });
   }
   get(uid: string): Observable<AppUser> {
-    object(ref(this.database, 'users/' + uid)).subscribe(data => 
-      console.log("get(uid)", data)
-      )
+    // object(ref(this.database, 'users/' + uid)).subscribe(data => 
+    //   console.log("get(uid)", data)
+    //   )
     return objectVal(ref(this.database, 'users/' + uid));
   }
 }
