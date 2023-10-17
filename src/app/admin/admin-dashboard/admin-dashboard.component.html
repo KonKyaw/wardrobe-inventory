@@ -13,7 +13,7 @@
     matSort (matSortChange)="announceSortChange($event)"
        class="mat-elevation-z8">
         <ng-container matColumnDef="title">
-            <th mat-header-cell *matHeaderCellDef> Title </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Title"> Title </th>
             <td mat-cell *matCellDef="let product">
                 <a class="title" [routerLink]="['/admin/products/', product.key]">
                     {{product.title}}

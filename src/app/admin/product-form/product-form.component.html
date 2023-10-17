@@ -52,7 +52,7 @@
                         Please enter size
                     </div>
                     <div *ngIf="inputSize?.errors?.['maxlength']">
-                        Maximum Size length is {{ inputSize.errors?.['maxlength'].requiredLength }} letters long.
+                        Size should be less than {{ inputSize.errors?.['maxlength'].requiredLength }} letters long.
                     </div>
                 </div>
             </div>

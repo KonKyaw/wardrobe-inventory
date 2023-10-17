@@ -85,7 +85,6 @@ export class ProductFormComponent {
     if (this.idProduct && this.idProduct != 'new') {
       this.isEdit = true;
       this.editProduct$.subscribe((product) => {
-        // this.product = product;
         this.productForm.setValue({
           title: product.title,
           price: product.price || 0,
@@ -96,7 +95,6 @@ export class ProductFormComponent {
           note: product.note || '',
         });
         if (!(product.size in this.sizes$)) {
-          console.log('size is not in db');
           this.inputSize.setValue(product.size);
           this.productForm.patchValue({
             size: "Others"
@@ -137,20 +135,23 @@ export class ProductFormComponent {
       new Date(),
       'yyyy-MM-dd HH:mm:ss'
     );
-    if (this.brand && this.brand.value == 'Add new brand') {
+    
+    if (this.brand && this.brand.value == 'Add new brand' && this.inputBrand.value) {
       product.brand = this.inputBrand.value;
-      if (this.inputBrand.value) {
-        this.brandService.create(this.inputBrand.value);
-      }
+      this.brandService.create(this.inputBrand.value);
     }
-    if (this.size && this.size.value == 'Others') {
+    if (this.size && this.size.value == 'Others' && this.inputSize.value) {
       product.size = this.inputSize.value;
     }
     if (this.idProduct && this.idProduct != 'new') {
       product.updatedDate = currDateTime;
       product.updatedUser = this.user;
-      this.productService.update(product, this.idProduct);
-      this.router.navigate(['/admin/products']);
+      this.editProduct$.subscribe((Data) => {
+        product.createdDate = Data.createdDate;
+        product.createdUser = Data.createdUser;
+        this.productService.update(product, this.idProduct!);
+        this.router.navigate(['/admin/products']);
+      });
     } else {
       product.createdDate = product.updatedDate = currDateTime;
       product.createdUser = product.updatedUser = this.user;
