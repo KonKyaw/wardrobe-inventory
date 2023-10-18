@@ -94,12 +94,20 @@ export class ProductFormComponent {
           size: product.size || '',
           note: product.note || '',
         });
-        if (!(product.size in this.sizes$)) {
-          this.inputSize.setValue(product.size);
-          this.productForm.patchValue({
+        this.sizes$.subscribe(value=>{
+          let isExist = false;
+          value.forEach((size: any) => {
+            if(size.name == product.size) {
+              isExist = true;
+            }
+          });  
+          if(!isExist && product.size){
+            // console.log("doesnt exist in DB", isExist)
+            this.inputSize.setValue(product.size);
+            this.productForm.patchValue({
             size: "Others"
-          })
-        } 
+          })}    
+        })
       });
     }
 
