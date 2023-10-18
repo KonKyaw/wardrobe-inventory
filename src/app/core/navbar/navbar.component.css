@@ -5,6 +5,7 @@
 .dropdown-menu.show {
     margin-top: revert;
     transform: translateX(-5%);
+    min-width: auto;
 }
 
 .navbar {
