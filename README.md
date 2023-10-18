@@ -1,6 +1,6 @@
 # WardrobeInventory
 
-TLDR: I have created an angular website as part of my learning process! Play around with it and tell me what you think!<br> 
+TLDR: I have created an angular website as part of my learning process! Feel free to play around with the demo site and tell me what you think!<br> 
 **Demo**: [Demo Wardrobe Inventory](https://fir-wardrobe-inventory.firebaseapp.com/)
 
 ##### Table of Contents  
@@ -43,7 +43,7 @@ _Version: 1.0_
 - **Version Compatibility**: this project started from the [Angular online course by Mosh](https://codewithmosh.com/p/angular-master-class). His course structure and project idea, which was originally a online shopping platform, are fine but the course was already 5 years old. So, a lot of codes and packages that are in the course are already deprecated, but I wanted to use more up-to-date ones. This meant big obstacles every step of the way, but also more rewarding at the same time.
 - **Firebase vs Angularfire**: there is a whole separate set of packages for angular called angularfire. It is based on vanilla firebase but things got complicated pretty quick when you try to find your way through things, and mix up the similar commands between the two.
 - Almost every detailed behaviour is intended: they are working like this probably because I have tried hard to code them in that way.
-- Let me know what you think! Please leave your comments on [my LinkedIn](www.linkedin.com/in/kaung-kyaw-414116147). It would be very helpful for me and much appreciated!
+- Let me know what you think! Please leave your comments in [the discussions](https://github.com/KonKyaw/wardrobe-inventory/discussions) or on [my LinkedIn](www.linkedin.com/in/kaung-kyaw-414116147). It would be very helpful for me and much appreciated!
 
 # Development 
 
@@ -53,9 +53,6 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
 ## Build
 
