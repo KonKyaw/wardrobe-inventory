@@ -3,12 +3,13 @@
     "rules": "database.rules.json"
   },
   "hosting": {
+    "site": "wardrobe-inventory-kkyp",
     "public": "dist/wardrobe-inventory",
     "ignore": [
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
-    ],
+],
     "rewrites": [
       {
         "source": "**",
