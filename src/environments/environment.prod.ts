@@ -2,7 +2,7 @@ export const environment = {
     production: true,
     firebase: {
         apiKey: "AIzaSyCfC3ScFCaDL8274ZTXuxeC7jgJjYjVO8g",
-        authDomain: "wardrobe-inventory-15a18.firebaseapp.com",
+        authDomain: "wardrobe-inventory-kkyp.firebaseapp.com",
         databaseURL: "https://wardrobe-inventory-15a18-default-rtdb.firebaseio.com",
         projectId: "wardrobe-inventory-15a18",
         storageBucket: "wardrobe-inventory-15a18.appspot.com",

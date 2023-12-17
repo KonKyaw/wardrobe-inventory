@@ -9,7 +9,7 @@
     "wardrobe-inventory-15a18": {
       "hosting": {
         "prod": [
-          "wardrobe-inventory-15a18"
+          "wardrobe-inventory-kkyp"
         ]
       }
     },
@@ -17,6 +17,13 @@
       "hosting": {
         "demo": [
           "fir-wardrobe-inventory"
+        ]
+      }
+    },
+    "fir-wardrobe-inventory-42f37": {
+      "hosting": {
+        "dev": [
+          "wardrobe-inventory-42f37"
         ]
       }
     }
